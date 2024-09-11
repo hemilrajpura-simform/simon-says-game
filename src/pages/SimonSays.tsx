@@ -13,6 +13,46 @@ const SimonSays: React.FC = () => {
   const [currentLevel, setCurrentLevel] = useState<number>(0);
   const [activeButton, setActiveButton] = useState<string | null>(null);
   const [highestScore, setHighestScore] = useState<number>(0);
+  console.log(currentLevel);
+
+  const requestNotificationPermission = () => {
+    if ("Notification" in window && "serviceWorker" in navigator) {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          console.log("Notification permission granted.");
+        } else {
+          console.log("Notification permission denied.");
+        }
+      });
+    }
+  };
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").then((registration) => {
+        console.log(
+          "Service Worker registered with scope:",
+          registration.scope
+        );
+      });
+    }
+
+    requestNotificationPermission();
+  }, []);
+
+  const showLocalNotification = (title: string, body: string) => {
+    if (Notification.permission === "granted") {
+      navigator.serviceWorker.getRegistration().then(function (registration) {
+        if (registration) {
+          registration.showNotification(title, {
+            body: body,
+            // icon: "/icon.png",
+            // vibrate: [200, 100, 200],
+          });
+        }
+      });
+    }
+  };
 
   useEffect(() => {
     const storedHighScore = localStorage.getItem("simonHighestScore");
@@ -79,7 +119,13 @@ const SimonSays: React.FC = () => {
 
     if (newPlayerSequence.length === gameSequence.length) {
       setIsPlayerTurn(false);
-      if (currentLevel) playWinSound();
+      if (currentLevel) {
+        playWinSound();
+      }
+      if (currentLevel > highestScore) {
+        console.log(" iff fifsdvckgfakhjfvasdfjhasdfkjhvjb");
+        showLocalNotification("", "Congrats on setting a new high score");
+      }
       setStatus("Correct! Next level.");
       setTimeout(nextLevel, 1000);
     }
