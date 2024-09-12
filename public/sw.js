@@ -5,8 +5,8 @@ self.addEventListener("push", function (event) {
 
   const options = {
     body: data,
-    // icon: "android-icon-192x192",
-    // badge: "android-icon-192x192",
+    icon: "android-icon-192x192",
+    badge: "android-icon-192x192",
   };
 
   event.waitUntil(self.registration.showNotification("Simon Says", options));

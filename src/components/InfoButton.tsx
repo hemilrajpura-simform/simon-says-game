@@ -10,7 +10,7 @@ const InfoButton: React.FC = () => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         style={{
-          backgroundColor: "#2980b9", // Blue button for dark theme
+          backgroundColor: "#2980b9",
           color: "#fff",
           borderRadius: "50%",
           width: "40px",
@@ -30,9 +30,9 @@ const InfoButton: React.FC = () => {
         <div
           style={{
             position: "absolute",
-            bottom: "50px", // Position the tooltip above the button
+            bottom: "50px",
             right: "0",
-            backgroundColor: "#34495e", // Dark background for the guide box
+            backgroundColor: "#34495e",
             color: "#fff",
             padding: "10px",
             borderRadius: "8px",
@@ -47,7 +47,8 @@ const InfoButton: React.FC = () => {
             - Click the buttons in the same order.
             <br />
             - The sequence gets longer each time.
-            <br />- Try to reach the highest level!
+            <br />- Try to reach the highest level! - v1.0.0
+            <br />
           </p>
         </div>
       )}

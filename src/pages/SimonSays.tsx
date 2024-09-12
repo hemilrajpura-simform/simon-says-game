@@ -13,7 +13,6 @@ const SimonSays: React.FC = () => {
   const [currentLevel, setCurrentLevel] = useState<number>(0);
   const [activeButton, setActiveButton] = useState<string | null>(null);
   const [highestScore, setHighestScore] = useState<number>(0);
-  console.log(currentLevel);
 
   const requestNotificationPermission = () => {
     if ("Notification" in window && "serviceWorker" in navigator) {
@@ -46,7 +45,7 @@ const SimonSays: React.FC = () => {
         if (registration) {
           registration.showNotification(title, {
             body: body,
-            // icon: "/icon.png",
+            icon: "/icon.png",
             // vibrate: [200, 100, 200],
           });
         }
@@ -118,13 +117,12 @@ const SimonSays: React.FC = () => {
     }
 
     if (newPlayerSequence.length === gameSequence.length) {
+      if (currentLevel > highestScore) {
+        showLocalNotification("", "Congrats on setting a new high score");
+      }
       setIsPlayerTurn(false);
       if (currentLevel) {
         playWinSound();
-      }
-      if (currentLevel > highestScore) {
-        console.log(" iff fifsdvckgfakhjfvasdfjhasdfkjhvjb");
-        showLocalNotification("", "Congrats on setting a new high score");
       }
       setStatus("Correct! Next level.");
       setTimeout(nextLevel, 1000);
