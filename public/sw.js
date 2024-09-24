@@ -27,7 +27,13 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log("Caching audio file");
-      return cache.addAll(FILES_TO_CACHE);
+      cache.add("/");
+      cache.add("/static/js/bundle.js");
+      cache.add("/index.html");
+      cache.add("/static/css/main.css");
+      cache.add("/sounds/winSound.wav");
+      cache.add("/sounds/clickSound.wav");
+      cache.add("/sounds/wrongSound.wav");
     })
   );
 });
