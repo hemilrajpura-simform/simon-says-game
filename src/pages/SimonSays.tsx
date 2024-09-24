@@ -46,7 +46,8 @@ const SimonSays: React.FC = () => {
           registration.showNotification(title, {
             body: body,
             icon: "/icon.png",
-            // vibrate: [200, 100, 200],
+            silent: false,
+            vibrate: [200, 100, 200],
           });
         }
       });
