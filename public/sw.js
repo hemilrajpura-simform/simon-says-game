@@ -40,18 +40,29 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) {
-        console.log("Serving audio from cache:", event.request.url);
-        return response;
-      }
-
-      return fetch(event.request).catch(() => {
-        console.log(
-          "Network unavailable, and no cache for:",
-          event.request.url
+    caches
+      .match(event.request)
+      .then((cachedResponse) => {
+        // Serve from cache if available, otherwise fetch from network
+        return (
+          cachedResponse ||
+          fetch(event.request).then((networkResponse) => {
+            return caches.open(CACHE_NAME).then((cache) => {
+              // Cache JS/CSS files dynamically only for files from /static/ path
+              if (event.request.url.includes("/static/")) {
+                cache.put(event.request, networkResponse.clone());
+              }
+              return networkResponse;
+            });
+          })
         );
-      });
-    })
+      })
+      .catch(() => {
+        // Fallback for offline (optional)
+        if (event.request.url.endsWith(".wav")) {
+          return caches.match("/sounds/winSound.wav");
+        }
+        return caches.match("/");
+      })
   );
 });
