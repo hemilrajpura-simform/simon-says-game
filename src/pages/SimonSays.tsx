@@ -13,6 +13,8 @@ const SimonSays: React.FC = () => {
   const [currentLevel, setCurrentLevel] = useState<number>(0);
   const [activeButton, setActiveButton] = useState<string | null>(null);
   const [highestScore, setHighestScore] = useState<number>(0);
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const [isOnline, setIsOnline] = useState(false);
 
   const requestNotificationPermission = () => {
     if ("Notification" in window && "serviceWorker" in navigator) {
@@ -25,6 +27,29 @@ const SimonSays: React.FC = () => {
       });
     }
   };
+
+  useEffect(() => {
+    const handleOffline = () => {
+      setIsOffline(true);
+    };
+
+    const handleOnline = () => {
+      setIsOffline(false);
+      setIsOnline(true);
+
+      setTimeout(() => {
+        setIsOnline(false);
+      }, 5000);
+    };
+
+    window.addEventListener("offline", handleOffline);
+    window.addEventListener("online", handleOnline);
+
+    return () => {
+      window.removeEventListener("offline", handleOffline);
+      window.removeEventListener("online", handleOnline);
+    };
+  }, []);
 
   useEffect(() => {
     if ("serviceWorker" in navigator) {
@@ -169,6 +194,15 @@ const SimonSays: React.FC = () => {
       </div>
       <h3>Level: {currentLevel}</h3>
       <h3>Highest Score: {highestScore}</h3>
+
+      {isOffline && (
+        <div className="offline-popup">
+          You are currently offline. Some features may not be available.
+        </div>
+      )}
+
+      {isOnline && <div className="online-popup">You are back online!</div>}
+
       <InfoButton />
     </div>
   );

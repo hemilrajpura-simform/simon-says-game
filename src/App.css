@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+.offline-popup,
+.online-popup {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.offline-popup {
+  background-color: #ff9800;
+  color: white;
+}
+
+.online-popup {
+  background-color: #4caf50;
+  color: white;
+}
