@@ -13,7 +13,7 @@ const GameStatus: React.FC<GameStatusProps> = ({ status, onStart }) => {
         style={{
           background: "linear-gradient(45deg, #e74c3c, #f39c12)",
           color: "#fff",
-          padding: "15px 30px",
+          padding: "13px 25px",
           fontSize: "18px",
           borderRadius: "30px",
           border: "none",
