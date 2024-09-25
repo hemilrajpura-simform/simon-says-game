@@ -12,7 +12,7 @@ self.addEventListener("push", function (event) {
   event.waitUntil(self.registration.showNotification("Simon Says", options));
 });
 
-const CACHE_NAME = "cache-files";
+const CACHE_NAME_AND_VERSION = "cache-files-v1";
 const FILES_TO_CACHE = [
   "/",
   "/index.html",
@@ -23,7 +23,7 @@ const FILES_TO_CACHE = [
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
+    caches.open(CACHE_NAME_AND_VERSION).then((cache) => {
       console.log("Caching audio file");
       cache.addAll(FILES_TO_CACHE);
     })
@@ -32,7 +32,22 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", (event) => {
   console.log("activation..");
-  event.waitUntil(self.clients.claim());
+  event.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(
+        keyList.map((key) => {
+          if (
+            key !== CACHE_NAME_AND_VERSION &&
+            key !== "images" &&
+            key !== "workbox-precache"
+          ) {
+            return caches.delete(key);
+          }
+          return null;
+        })
+      );
+    })
+  );
 });
 
 self.addEventListener("fetch", (event) => {
