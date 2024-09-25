@@ -39,7 +39,7 @@ const SimonSays: React.FC = () => {
 
       setTimeout(() => {
         setIsOnline(false);
-      }, 5000);
+      }, 2500);
     };
 
     window.addEventListener("offline", handleOffline);
@@ -165,9 +165,9 @@ const SimonSays: React.FC = () => {
   return (
     <div
       style={{
+        height: "100vh",
         textAlign: "center",
         backgroundColor: "#2c3e50",
-        height: "100vh",
         color: "#ecf0f1",
         position: "relative",
       }}
@@ -177,9 +177,9 @@ const SimonSays: React.FC = () => {
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(2, 150px)",
-          gridGap: "20px",
+          gridGap: "5px",
           justifyContent: "center",
-          marginTop: "50px",
+          marginTop: "30px",
         }}
       >
         {colors.map((color, index) => (

@@ -7,7 +7,7 @@ type GameStatusProps = {
 
 const GameStatus: React.FC<GameStatusProps> = ({ status, onStart }) => {
   return (
-    <div style={{ paddingTop: 50 }}>
+    <div style={{ paddingTop: 15 }}>
       <h2>{status}</h2>
       <button
         style={{

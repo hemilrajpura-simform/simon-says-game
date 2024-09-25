@@ -28,13 +28,8 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h3 {
+  margin: 10px;
 }
 
 .offline-popup,
@@ -43,19 +38,19 @@
   top: 0;
   width: 100%;
   text-align: center;
-  padding: 10px;
-  font-size: 16px;
+  padding: 6px;
+  font-size: 12px;
   z-index: 1000;
   transition: transform 0.3s ease-in-out;
   box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .offline-popup {
-  background-color: #ff9800;
+  background-color: #ff9900d6;
   color: white;
 }
 
 .online-popup {
-  background-color: #4caf50;
+  background-color: #4caf4fcf;
   color: white;
 }

@@ -44,8 +44,8 @@ const SimonButton: React.FC<SimonButtonProps> = ({
       onClick={handleClick}
       style={{
         backgroundColor: isActive ? highlightColor(color) : color,
-        width: "150px",
-        height: "150px",
+        width: "130px",
+        height: "130px",
         borderRadius: "50%",
         margin: "10px",
         border: "5px solid #ecf0f1",
