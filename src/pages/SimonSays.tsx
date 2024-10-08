@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SimonButton from "../components/SimonButton";
 import GameStatus from "../components/GameStatus";
 import InfoButton from "../components/InfoButton";
+import GetLocation from "../components/GetLocation";
 
 const colors = ["#e74c3c", "#27ae60", "#2980b9", "#f1c40f"];
 
@@ -202,7 +203,7 @@ const SimonSays: React.FC = () => {
       )}
 
       {isOnline && <div className="online-popup">You are back online!</div>}
-
+      <GetLocation />
       <InfoButton />
     </div>
   );
